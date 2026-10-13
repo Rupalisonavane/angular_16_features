@@ -4,8 +4,7 @@ import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
   beforeEach(() => TestBed.configureTestingModule({
-    imports: [RouterTestingModule],
-    declarations: [AppComponent]
+    imports: [RouterTestingModule, AppComponent]
   }));
 
   it('should create the app', () => {
@@ -17,7 +16,7 @@ describe('AppComponent', () => {
   it(`should have as title 'angular16-app'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('angular16-app');
+    expect(app.name).toEqual('angular16-app');
   });
 
   it('should render title', () => {

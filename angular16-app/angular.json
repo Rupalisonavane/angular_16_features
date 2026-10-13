@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/angular16-app",
+            "outputPath": "dist/angular16-app/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -97,8 +97,66 @@
             ],
             "scripts": []
           }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/angular16-app/server",
+            "main": "server.ts",
+            "tsConfig": "tsconfig.server.json",
+            "inlineStyleLanguage": "scss"
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "sourceMap": true,
+              "extractLicenses": false,
+              "vendorChunk": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "configurations": {
+            "development": {
+              "browserTarget": "angular16-app:build:development",
+              "serverTarget": "angular16-app:server:development"
+            },
+            "production": {
+              "browserTarget": "angular16-app:build:production",
+              "serverTarget": "angular16-app:server:production"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "options": {
+            "routes": [
+              "/"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "angular16-app:build:production",
+              "serverTarget": "angular16-app:server:production"
+            },
+            "development": {
+              "browserTarget": "angular16-app:build:development",
+              "serverTarget": "angular16-app:server:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "4b3ad0a6-85a2-4213-8eb8-5e907d969844"
   }
 }
